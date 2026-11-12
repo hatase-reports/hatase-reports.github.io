@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>中東投資レポート 本棚</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#EEEDEB; --ink:#2a2724; --sub:#6f6b67; --line:#dcdad6;
+  --gold:#b8893b; --teal:#2f8f8a; --terra:#b5583c; --shelf:#d2d0cc;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--bg);color:var(--ink);font-family:"Noto Serif JP","Noto Serif CJK JP","Hiragino Mincho ProN","Yu Mincho",serif;-webkit-font-smoothing:antialiased}
+header{padding:28px 20px 12px}
+.brand{font-size:11px;letter-spacing:.2em;color:#3a3633;font-weight:700}
+h1{font-size:22px;font-weight:700;margin-top:6px}
+.lead{font-size:13px;color:var(--sub);margin-top:6px;line-height:1.6}
+.chips{display:flex;gap:8px;padding:8px 20px 4px;overflow-x:auto}
+.chip{border:1px solid var(--line);background:#fff;border-radius:999px;padding:7px 14px;font-size:13px;color:var(--ink);white-space:nowrap;cursor:pointer}
+.chip.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.sec{padding:22px 20px 4px;font-size:12px;letter-spacing:.18em;color:var(--sub);font-weight:700}
+.themes{display:grid;gap:12px;padding:10px 20px 4px}
+@media(min-width:700px){.themes{grid-template-columns:repeat(3,1fr)}}
+.theme{position:relative;display:flex;flex-direction:column;background:#fff;border-radius:12px;overflow:hidden;cursor:pointer;box-shadow:0 4px 12px rgba(30,30,30,.08);-webkit-tap-highlight-color:transparent;border:0;text-align:left;font:inherit;color:inherit;width:100%}
+.theme:active{transform:scale(.98)}
+.theme .band{height:6px}
+.theme .body{padding:16px 18px 18px;display:grid;grid-template-columns:1fr auto;gap:2px 10px;align-items:center}
+.theme .en{font-size:10px;letter-spacing:.2em;font-weight:700;grid-column:1/-1}
+.theme .name{font-size:19px;font-weight:700;margin-top:2px}
+.theme .arrow{font-size:20px;color:var(--sub);grid-row:2;grid-column:2}
+.theme .desc{font-size:12px;color:var(--sub);line-height:1.6;margin-top:4px}
+.theme .meta{font-size:11px;color:var(--sub);margin-top:10px;padding-top:10px;border-top:1px solid #ebe9e6;grid-column:1/-1}
+.t-サウジ不動産 .band{background:#a93a2e}.t-サウジ不動産 .en{color:#a93a2e}
+.t-UAE株式 .band{background:#1f6fa5}.t-UAE株式 .en{color:#1f6fa5}
+.t-サウジ株式 .band{background:#0f6b3e}.t-サウジ株式 .en{color:#0f6b3e}
+.t-特集 .band{background:#4a4541}.t-特集 .en{color:#4a4541}
+.back{font-family:inherit;display:inline-block;margin:18px 20px 0;background:none;border:0;font-size:13px;color:var(--sub);cursor:pointer;padding:4px 0}
+.cathead{margin:12px 20px 0;padding:18px 18px 16px;border-radius:12px;color:#fff}
+.cathead .en{font-size:10px;letter-spacing:.2em;opacity:.85;font-weight:700}
+.cathead .name{font-size:22px;font-weight:700;margin-top:4px}
+.cathead .desc{font-size:12px;line-height:1.6;margin-top:6px;opacity:.92}
+.wrap{max-width:960px;margin:0 auto}
+.shelf{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:28px 18px;padding:18px 20px 8px}
+@media(min-width:700px){.shelf{grid-template-columns:repeat(auto-fill,minmax(180px,220px))}}
+.book{position:relative;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.book:active .cover{transform:scale(.97)}
+.cover{aspect-ratio:3/4;border-radius:4px 8px 8px 4px;padding:14px 12px;display:flex;flex-direction:column;justify-content:space-between;color:#fff;box-shadow:0 6px 14px rgba(30,30,30,.18),inset 6px 0 0 rgba(0,0,0,.12);transition:transform .15s;overflow:hidden;position:relative}
+.cover::after{content:"";position:absolute;right:-30%;top:-20%;width:90%;aspect-ratio:1;border:1px solid rgba(255,255,255,.18);border-radius:50%}
+.c-サウジ不動産{background:linear-gradient(160deg,#c4584a,#8f2c22)}
+.c-サウジ株式{background:linear-gradient(160deg,#1f8a55,#0b5230)}
+.c-UAE株式{background:linear-gradient(160deg,#2f86c0,#17557e)}
+.c-特集{background:linear-gradient(160deg,#5a5450,#2c2826)}
+.c-top{font-size:9px;letter-spacing:.18em;opacity:.85;font-weight:700}
+.c-no{font-size:26px;font-weight:700;margin-top:6px;letter-spacing:.02em}
+.c-title{font-size:13px;font-weight:700;line-height:1.5;position:relative;z-index:1}
+.c-date{font-size:10px;opacity:.85;margin-top:8px}
+.cover.has-img::after{display:none}
+.cover img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.book::before{content:"";position:absolute;left:-10px;right:-10px;bottom:-12px;height:8px;background:var(--shelf);border-radius:2px;box-shadow:0 3px 4px rgba(30,30,30,.15)}
+.new{position:absolute;top:-6px;right:-6px;background:var(--ink);color:#fff;font-size:10px;font-weight:700;padding:3px 7px;border-radius:999px;z-index:2}
+.empty{grid-column:1/-1;padding:40px 20px;text-align:center;color:var(--sub);font-size:14px}
+.cta{margin:28px 20px 8px;display:block;text-align:center;background:var(--teal);color:#fff;text-decoration:none;border-radius:10px;padding:14px;font-size:15px;font-weight:700}
+.note{font-size:11px;color:var(--sub);line-height:1.7;padding:12px 20px 40px}
+/* viewer */
+#viewer{position:fixed;inset:0;background:#3a3631;display:none;flex-direction:column;z-index:10}
+#viewer.open{display:flex}
+.vbar{display:flex;align-items:center;gap:10px;padding:12px 14px;padding-top:max(12px,env(safe-area-inset-top));background:var(--ink);color:#fff}
+.vtitle{flex:1;font-size:14px;font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.vsave{background:var(--teal)!important}
+.vclose{background:rgba(255,255,255,.12);color:#fff;border:0;border-radius:8px;padding:8px 14px;font-size:13px;font-family:inherit}
+#pages{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:12px 8px 40px}
+.prow{display:flex;justify-content:center;gap:12px;margin:0 auto 12px}
+.prow canvas{display:block;background:#fff;box-shadow:0 2px 8px rgba(0,0,0,.3)}
+.vmsg{color:#e8dfd0;text-align:center;font-size:13px;padding:40px 20px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="brand">HATASE CLUB REPORT</div>
+  <h1>中東投資レポート</h1>
+  <p class="lead">サウジアラビアの不動産と、サウジ・UAEの株式市場を現地から解説します。毎週1冊ずつ増えていきます。</p>
+</header>
+<main id="app"></main>
+<a class="cta" id="cta" href="https://calendar.app.google/6KevC5Phgyh6qsmj9" target="_blank" rel="noopener">30分のオンライン面談を予約する</a>
+<p class="note">本レポートは情報提供を目的としたものであり、特定の金融商品の勧誘を目的としたものではありません。数値は作成時点のものです。投資の判断はご自身でお願いいたします。</p>
+
+</div>
+
+<div id="viewer">
+  <div class="vbar"><div class="vtitle" id="vtitle"></div><button class="vclose vsave" id="vsave">保存</button><button class="vclose" id="vclose">閉じる</button></div>
+  <div id="pages"></div>
+</div>
+
+<script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.min.js"></script>
+<script>
+// LIFF IDは発行後にここへ貼り付けます
+const LIFF_ID = "2012577177-e4zEmN3k";
+// PDFの保存を許可する場合は true にする
+const ALLOW_SAVE = false;
+if (!ALLOW_SAVE) document.getElementById("vsave").style.display = "none";
+
+const PDFJS = "https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/";
+if (window.pdfjsLib) pdfjsLib.GlobalWorkerOptions.workerSrc = PDFJS + "build/pdf.worker.min.js";
+
+let reports = [], renderToken = 0, current = null, currentPdf = null;
+
+if (LIFF_ID && window.liff) { liff.init({ liffId: LIFF_ID }).catch(()=>{}); }
+
+const pad = n => String(n).padStart(2,"0");
+const fmtDate = d => { const [y,m,day] = d.split("-"); return `${y}.${m}.${day}`; };
+
+const THEMES = [
+  {key:"サウジ不動産", en:"SAUDI REAL ESTATE", desc:"外国人に開かれた新制度、リヤドの開発、地価と政策"},
+  {key:"UAE株式",     en:"UAE EQUITY",        desc:"ドバイ・アブダビの市場、主な銘柄、税金とルール"},
+  {key:"サウジ株式",   en:"SAUDI EQUITY",      desc:"世界13位のタダウル、外国人のルール、主な業種"},
+];
+const THEME_BG = {"サウジ不動産":"linear-gradient(150deg,#c4584a,#8f2c22)","UAE株式":"linear-gradient(150deg,#2f86c0,#17557e)","サウジ株式":"linear-gradient(150deg,#1f8a55,#0b5230)","特集":"linear-gradient(150deg,#5a5450,#2c2826)"};
+const themeOf = r => THEMES.some(t=>t.key===r.tag) ? r.tag : "特集";
+const esc = t => String(t).replace(/[&<>"]/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+function makeBook(r){
+  const book = document.createElement("div");
+  book.className = "book";
+  const tag = themeOf(r);
+  book.innerHTML = `
+    ${r===reports[0] ? '<span class="new">NEW</span>' : ""}
+    <div class="cover c-${tag}${r.cover ? " has-img" : ""}">
+      ${r.cover ? `<img src="${esc(r.cover)}" alt="">` : `
+      <div><div class="c-top">HATASE CLUB REPORT</div><div class="c-no">No.${pad(r.no)}</div></div>
+      <div><div class="c-title">${esc(r.title)}</div><div class="c-date">${fmtDate(r.date)}｜${esc(r.tag)}</div></div>`}
+    </div>`;
+  book.onclick = ()=> openReport(r);
+  return book;
+}
+
+// トップ：3つのテーマ＋新着
+function drawHome(){
+  const app = document.getElementById("app");
+  app.innerHTML = '<div class="sec">テーマから選ぶ</div><div class="themes" id="themes"></div>';
+  const box = document.getElementById("themes");
+  const list = [...THEMES];
+  if (reports.some(r=>themeOf(r)==="特集")) list.push({key:"特集", en:"SPECIAL", desc:"3つのテーマにまたがる特集"});
+  list.forEach(t=>{
+    const items = reports.filter(r=>themeOf(r)===t.key);
+    const btn = document.createElement("button");
+    btn.className = "theme t-" + t.key;
+    btn.innerHTML = `<div class="band"></div><div class="body">
+      <div class="en">${t.en}</div><div class="name">${t.key}</div><div class="arrow">›</div></div>`;
+    btn.onclick = ()=>{ history.pushState({cat:t.key}, "", "#cat=" + encodeURIComponent(t.key)); route(); };
+    box.appendChild(btn);
+  });
+  if (reports.length){
+    const sec = document.createElement("div"); sec.className = "sec"; sec.textContent = "新着"; app.appendChild(sec);
+    const shelf = document.createElement("div"); shelf.className = "shelf"; app.appendChild(shelf);
+    reports.slice(0,3).forEach(r=> shelf.appendChild(makeBook(r)));
+  }
+}
+
+// テーマ別の一覧
+function drawCategory(key){
+  const t = THEMES.find(x=>x.key===key) || {key, en:"SPECIAL", desc:"3つのテーマにまたがる特集"};
+  const items = reports.filter(r=>themeOf(r)===key);
+  const app = document.getElementById("app");
+  app.innerHTML = `<button class="back" id="back">‹ テーマ一覧に戻る</button>
+    <div class="cathead" style="background:${THEME_BG[key]||THEME_BG["特集"]}"><div class="en">${t.en}</div><div class="name">${esc(t.key)}</div></div>
+    <div class="shelf" id="shelf"></div>`;
+  const shelf = document.getElementById("shelf");
+  if (!items.length) shelf.innerHTML = '<p class="empty">最初の号を準備中です。</p>';
+  items.forEach(r=> shelf.appendChild(makeBook(r)));
+  document.getElementById("back").onclick = ()=>{
+    if (history.state && history.state.cat) history.back();
+    else { history.replaceState(null, "", location.pathname + location.search); route(); }
+  };
+}
+
+let shownRoute = null;
+function route(){
+  const m = location.hash.match(/^#cat=(.+)$/);
+  const key = m ? decodeURIComponent(m[1]) : "";
+  if (key === shownRoute) return;
+  shownRoute = key;
+  key ? drawCategory(key) : drawHome();
+  window.scrollTo(0,0);
+}
+
+async function openReport(r){
+  const token = ++renderToken;
+  current = r;
+  document.getElementById("vtitle").textContent = `No.${pad(r.no)}　${r.title}`;
+  const pages = document.getElementById("pages");
+  pages.innerHTML = '<p class="vmsg">読み込み中…</p>';
+  pages.scrollTop = 0;
+  document.getElementById("viewer").classList.add("open");
+  document.body.style.overflow = "hidden";
+  history.pushState({viewer:true}, "");
+  try{
+    if (!window.pdfjsLib) throw new Error("pdfjs");
+    const pdf = await pdfjsLib.getDocument({
+      url: r.file,
+      cMapUrl: PDFJS + "cmaps/", cMapPacked: true,
+      standardFontDataUrl: PDFJS + "standard_fonts/"
+    }).promise;
+    if (token !== renderToken) return;
+    currentPdf = pdf;
+    await layoutPages(token);
+  }catch(e){
+    pages.innerHTML = '<p class="vmsg">レポートを開けませんでした。通信環境をご確認のうえ、もう一度お試しください。</p>';
+  }
+}
+
+
+// 画面に1ページ全体が収まる大きさで表示し、横幅に余裕があれば見開き（2ページ）にする
+async function layoutPages(token){
+  const pdf = currentPdf; if (!pdf) return;
+  const pages = document.getElementById("pages");
+  const first = (await pdf.getPage(1)).getViewport({scale:1});
+  const ratio = first.width / first.height;
+  const availW = pages.clientWidth - 16, availH = pages.clientHeight - 24;
+  let pw = Math.min(availW, availH * ratio);
+  const spread = availW > 700 && availW >= pw * 2 + 12;
+  if (spread) pw = Math.min((availW - 12) / 2, availH * ratio);
+  // 表紙は1枚、その後は2-3、4-5…と本のように並べる
+  const rows = [];
+  if (spread){ rows.push([1]); for (let i=2;i<=pdf.numPages;i+=2) rows.push(i+1<=pdf.numPages?[i,i+1]:[i]); }
+  else { for (let i=1;i<=pdf.numPages;i++) rows.push([i]); }
+  pages.innerHTML = "";
+  const dpr = Math.min(window.devicePixelRatio || 1, 2.5);
+  for (const row of rows){
+    const div = document.createElement("div"); div.className = "prow"; pages.appendChild(div);
+    for (const n of row){
+      if (token !== renderToken) return;
+      const page = await pdf.getPage(n);
+      const base = page.getViewport({scale:1});
+      const vp = page.getViewport({scale: pw / base.width * dpr});
+      const cv = document.createElement("canvas");
+      cv.width = vp.width; cv.height = vp.height;
+      cv.style.width = pw + "px"; cv.style.height = (pw / base.width * base.height) + "px";
+      div.appendChild(cv);
+      await page.render({canvasContext: cv.getContext("2d"), viewport: vp}).promise;
+    }
+  }
+}
+let resizeTimer;
+window.addEventListener("resize", ()=>{
+  if (!document.getElementById("viewer").classList.contains("open")) return;
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(()=>{ const t = ++renderToken; layoutPages(t); }, 300);
+});
+
+function closeViewer(){
+  renderToken++;
+  currentPdf = null;
+  document.getElementById("viewer").classList.remove("open");
+  document.getElementById("pages").innerHTML = "";
+  document.body.style.overflow = "";
+}
+document.getElementById("cta").onclick = e => {
+  if (window.liff && liff.isInClient && liff.isInClient()) { e.preventDefault(); liff.openWindow({ url: e.currentTarget.href, external: false }); }
+};
+document.getElementById("vsave").onclick = ()=>{
+  if (!current) return;
+  const url = new URL(current.file, location.href).href;
+  if (window.liff && liff.isInClient && liff.isInClient()) {
+    // LINE内ではダウンロードできないため、端末のブラウザでPDFを開き、そこから保存・共有してもらう
+    liff.openWindow({ url, external: true });
+  } else {
+    const a = document.createElement("a");
+    a.href = url; a.download = `HATASE_REPORT_No${pad(current.no)}.pdf`;
+    document.body.appendChild(a); a.click(); a.remove();
+  }
+};
+document.getElementById("vclose").onclick = ()=> history.back();
+window.addEventListener("popstate", ()=>{ if (document.getElementById("viewer").classList.contains("open")) closeViewer(); route(); });
+
+fetch("reports.json?t=" + Date.now())
+  .then(r=>r.json())
+  .then(list=>{
+    reports = list.sort((a,b)=> b.date.localeCompare(a.date) || b.no - a.no);
+    route();
+  })
+  .catch(()=>{ document.getElementById("app").innerHTML = '<p class="empty">読み込みに失敗しました。</p>'; });
+</script>
+</body>
+</html>
