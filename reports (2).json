@@ -1,0 +1,26 @@
+[
+  {
+    "no": 1,
+    "date": "2026-11-30",
+    "tag": "サウジ不動産",
+    "title": "外国人に開かれた、サウジ不動産の基本と現在地",
+    "file": "report-001.pdf",
+    "cover": "cover-001.jpg"
+  },
+  {
+    "no": 2,
+    "date": "2026-11-30",
+    "tag": "サウジ株式",
+    "title": "世界13位の市場、サウジ株式の基本と現在地",
+    "file": "report-002.pdf",
+    "cover": "cover-002.jpg"
+  },
+  {
+    "no": 3,
+    "date": "2026-11-30",
+    "tag": "UAE株式",
+    "title": "ドバイとアブダビ、UAE株式の基本と現在地",
+    "file": "report-003.pdf",
+    "cover": "cover-003.jpg"
+  }
+]
